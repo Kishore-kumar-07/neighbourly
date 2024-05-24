@@ -1,23 +1,28 @@
 package routes
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/Kishore-kumar-07/neighbourly/backend/config"
-	"context"
+	"github.com/Kishore-kumar-07/neighbourly/backend/controllers"
 )
 
 func SetupRouter() *gin.Engine {
 	
 	r := gin.Default()
-	client, err := config.ConnectDB();
+	err := config.ConnectDB();
 	if(err != nil){
-		panic(err)
+		fmt.Println(err)
 	}
-	defer client.Disconnect(context.Background())
+	// defer client.Disconnect(context.Background())
+
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Hello World!",
 		})
 	})
+
+	r.GET("/signup", controllers.SignUp)
+
 	return r
 }
