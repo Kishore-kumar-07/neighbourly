@@ -22,7 +22,7 @@ func SetupRouter() *gin.Engine {
 		})
 	})
 
-	r.GET("/signup", controllers.SignUp)
+	r.POST("/signup", controllers.SignUp)
 
 	return r
 }
