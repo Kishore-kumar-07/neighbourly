@@ -23,6 +23,7 @@ func SetupRouter() *gin.Engine {
 	})
 
 	r.POST("/signup", controllers.SignUp)
+	r.POST("/login", controllers.Login)
 
 	return r
 }

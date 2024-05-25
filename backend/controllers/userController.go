@@ -23,38 +23,87 @@ func SignUp (c *gin.Context) {
 	}
 
 	if(user.Email == "" || user.Password == "" || user.Name == "" || user.Phone == "") {
-		c.JSON(400, gin.H{"error": "Invalid Credentials"});
+		c.JSON(400, gin.H{"error":true, "message": "Invalid Credentials"});
 		return;
 	}
 
 	collection := client.Database("muruga").Collection("users");
-	fmt.Println(collection)
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	doc := collection.FindOne(ctx, bson.M{"name": user.Name});
 	if(doc != nil){
-		c.JSON(400, gin.H{"error": "User already exists"});
+		c.JSON(400, gin.H{"error":true, "message": "User already exists"});
 		return;
 	}
 
 	doc = collection.FindOne(ctx, bson.M{"name": user.Email});
 	if(doc != nil){
-		c.JSON(400, gin.H{"error": "Email already exists"});
+		c.JSON(400, gin.H{"error":true, "message": "Email already exists"});
 		return;
 	}
 
 	doc = collection.FindOne(ctx, bson.M{"name": user.Phone});
 	if(doc != nil){
-		c.JSON(400, gin.H{"error": "Phone number already exists"});
+		c.JSON(400, gin.H{"error":true, "message": "Phone number already exists"});
 		return;
 	}
 
 	res, err := collection.InsertOne(ctx, user);
 	if err != nil {
-		c.JSON(500, gin.H{"error": "Error while inserting user"});
+		c.JSON(500, gin.H{"error":true, "message": "Error while inserting user"});
 		return;
 	}
-	c.JSON(200, gin.H{"message": "User created successfully", "id": res.InsertedID});
+	c.JSON(200, gin.H{"error":false, "message": "User created successfully", "id": res.InsertedID});
+	return;
+}
+
+func Login (c *gin.Context) {
+	fmt.Println("check");
+	client := config.Client;
+	var user models.UserModel;
+	user.SetDefaults();
+
+	type LoginReq struct {
+		Email string `json:"email" bson:"email"`
+		Password string `json:"password" bson:"password"`
+	}
+
+	var loginReq LoginReq;
+
+	if err:= c.ShouldBindJSON(&loginReq); err != nil {
+		c.JSON(400, gin.H{"error":true, "message": err.Error()});
+		return;
+	}
+
+	if(loginReq.Email == "" || loginReq.Password == "") {
+		c.JSON(400, gin.H{"error":true, "message": "Invalid Credentials"});
+		return;
+	}
+
+	collection := client.Database("muruga").Collection("users");
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	doc := collection.FindOne(ctx, bson.M{"email": loginReq.Email});
+	if(doc == nil){
+		c.JSON(400, gin.H{"error":true, "message": "User does not exist"});
+		return;
+	}
+
+	fmt.Println("this is doc",loginReq.Email);
+
+	if err:= doc.Decode(&user); err != nil {	
+		fmt.Println("ths is user", user)
+		c.JSON(500, gin.H{"error":true, "message": "user not found"});
+		return
+	}
+
+	if(user.Password != loginReq.Password){
+		c.JSON(400, gin.H{"error":true, "message": "Invalid Password"});
+		return;
+	}
+
+	c.JSON(200, gin.H{"error":false, "message": "User logged in successfully"});
 	return;
 }
