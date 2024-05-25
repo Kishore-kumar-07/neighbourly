@@ -6,6 +6,8 @@ type UserModel struct {
 	Password string `json:"password" bson:"password"`
 	Phone string `json:"phone" bson:"phone"`
 	Role string `json:"role" bson:"role"`
+	District string `json:"district" bson:"district"`
+	Address string `json:"address" bson:"address"`
 }
 
 func (u * UserModel) SetDefaults() {
@@ -14,4 +16,6 @@ func (u * UserModel) SetDefaults() {
 	u.Password = "";
 	u.Phone = "";
 	u.Role = "";
+	u.District = "";
+	u.Address = "";
 }

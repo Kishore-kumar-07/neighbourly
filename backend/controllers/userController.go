@@ -3,10 +3,12 @@ package controllers
 import (
 	"context"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/Kishore-kumar-07/neighbourly/backend/config"
 	"github.com/Kishore-kumar-07/neighbourly/backend/models"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 )
@@ -31,31 +33,44 @@ func SignUp (c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	doc := collection.FindOne(ctx, bson.M{"name": user.Name});
-	if(doc != nil){
-		c.JSON(400, gin.H{"error":true, "message": "User already exists"});
-		return;
-	}
+	var res models.UserModel;
 
-	doc = collection.FindOne(ctx, bson.M{"name": user.Email});
-	if(doc != nil){
+	doc := collection.FindOne(ctx, bson.M{"email": user.Email});
+	if err := doc.Decode(&res); err ==nil {
+		fmt.Println(res.Email);
 		c.JSON(400, gin.H{"error":true, "message": "Email already exists"});
 		return;
 	}
 
-	doc = collection.FindOne(ctx, bson.M{"name": user.Phone});
-	if(doc != nil){
+	doc = collection.FindOne(ctx, bson.M{"email": user.Phone});
+	if err := doc.Decode(&res); err==nil {
 		c.JSON(400, gin.H{"error":true, "message": "Phone number already exists"});
 		return;
 	}
 
-	res, err := collection.InsertOne(ctx, user);
+	_, err := collection.InsertOne(ctx, user);
 	if err != nil {
 		c.JSON(500, gin.H{"error":true, "message": "Error while inserting user"});
 		return;
 	}
-	c.JSON(200, gin.H{"error":false, "message": "User created successfully", "id": res.InsertedID});
-	return;
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"email": user.Email,
+		"role" : user.Role,
+		"exp": time.Now().Add(time.Hour * 24 * 7).Unix(),
+	})
+
+	// token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+	// 	"foo": "bar",
+	// 	"nbf": time.Date(2015, 10, 10, 12, 0, 0, 0, time.UTC).Unix(),
+	// })
+	
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	c.JSON(200, gin.H{"error":false, "message": "User created successfully", "token": tokenString})
 }
 
 func Login (c *gin.Context) {

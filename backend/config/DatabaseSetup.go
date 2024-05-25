@@ -17,7 +17,7 @@ var Client *mongo.Client
 func ConnectDB() error {
 	mongoUrl := os.Getenv("MONGO_URL")
 	clientOptions := options.Client().ApplyURI(mongoUrl)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
 
 	var err error
@@ -27,7 +27,7 @@ func ConnectDB() error {
 		return err
 	}
 
-	ctx, cancel = context.WithTimeout(context.Background(), 2*time.Second)
+	ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	err = Client.Ping(ctx, readpref.Primary())
 	if err != nil {
