@@ -106,10 +106,8 @@ func Login (c *gin.Context) {
 		return;
 	}
 
-	fmt.Println("this is doc",loginReq.Email);
 
-	if err:= doc.Decode(&user); err != nil {	
-		fmt.Println("ths is user", user)
+	if err:= doc.Decode(&user); err != nil {
 		c.JSON(500, gin.H{"error":true, "message": "user not found"});
 		return
 	}
@@ -119,6 +117,16 @@ func Login (c *gin.Context) {
 		return;
 	}
 
-	c.JSON(200, gin.H{"error":false, "message": "User logged in successfully"});
-	return;
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"email": user.Email,
+		"role" : user.Role,
+		"exp": time.Now().Add(time.Hour * 24 * 7).Unix(),
+	})
+
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	c.JSON(200, gin.H{"error":false, "message": "User logged in successfully", "token": tokenString});
 }
