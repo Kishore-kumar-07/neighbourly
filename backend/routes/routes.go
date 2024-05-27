@@ -28,5 +28,7 @@ func SetupRouter() *gin.Engine {
 	r.POST("/login", controllers.Login)
 	r.POST("/setProvider", controllers.SetProvider)
 
+	r.GET("/topRatedProviders", controllers.TopRatedProviders)
+
 	return r
 }
