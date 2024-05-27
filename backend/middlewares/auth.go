@@ -12,7 +12,7 @@ import (
 func AuthMiddleware() gin.HandlerFunc{
 
 	return func(c *gin.Context) {
-		if c.Request.Method == "/login" || c.Request.Method == "/signup" {
+		if c.Request.URL.Path == "/login" || c.Request.URL.Path == "/signup" {
 			c.Next()
 			return;
 		}
