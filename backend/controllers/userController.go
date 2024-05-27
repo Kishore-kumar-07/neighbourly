@@ -57,6 +57,7 @@ func SignUp (c *gin.Context) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"email": user.Email,
 		"role" : user.Role,
+		"name" : user.Name,
 		"exp": time.Now().Add(time.Hour * 24 * 7).Unix(),
 	})
 
@@ -120,6 +121,7 @@ func Login (c *gin.Context) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"email": user.Email,
 		"role" : user.Role,
+		"name" : user.Name,
 		"exp": time.Now().Add(time.Hour * 24 * 7).Unix(),
 	})
 
