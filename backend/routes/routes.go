@@ -5,11 +5,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/Kishore-kumar-07/neighbourly/backend/config"
 	"github.com/Kishore-kumar-07/neighbourly/backend/controllers"
+	"github.com/Kishore-kumar-07/neighbourly/backend/middlewares"
 )
 
 func SetupRouter() *gin.Engine {
 	
 	r := gin.Default()
+	r.Use(middlewares.AuthMiddleware())
 	err := config.ConnectDB();
 	if(err != nil){
 		fmt.Println(err)
@@ -24,6 +26,7 @@ func SetupRouter() *gin.Engine {
 
 	r.POST("/signup", controllers.SignUp)
 	r.POST("/login", controllers.Login)
+	r.POST("/setProvider", controllers.SetProvider)
 
 	return r
 }
