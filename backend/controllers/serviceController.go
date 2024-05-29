@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/Kishore-kumar-07/neighbourly/backend/config"
@@ -94,15 +95,26 @@ func TopRatedProviders(c *gin.Context) {
 }
 
 func SearchService(c *gin.Context){
+	type searchTitle struct {
+		Title string `json:"title"`
+	}
+
 	var serviceProviders []models.ServiceProviderModel;
 	client := config.Client;
 	collection := client.Database("muruga").Collection("serviceProviders")
     ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
     defer cancel()
 
-	searchTitle := c.GetString("title");
+	var title searchTitle;
+	
+	if err := c.ShouldBindJSON(&title); err != nil {
+		c.JSON(400, gin.H{"error": true, "message": "Invalid request body"})
+		return
+	}
 
-	filter := bson.M{"title": bson.M{"$regex": searchTitle, "$options": "i"}}
+	fmt.Println("This is search title",title)
+
+	filter := bson.M{"title": bson.M{"$regex": title.Title, "$options": "i"}}
 
 	cursor, err := collection.Find(ctx, filter)
 	if err != nil {
