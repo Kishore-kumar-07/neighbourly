@@ -30,6 +30,7 @@ func SetupRouter() *gin.Engine {
 
 	r.GET("/topRatedProviders", controllers.TopRatedProviders)
 	r.POST("/searchService", controllers.SearchService)
+	r.POST("/buyService", controllers.BuyService)
 
 	return r
 }
