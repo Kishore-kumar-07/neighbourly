@@ -43,6 +43,15 @@ func SetProvider (c *gin.Context) {
 		return
 	}
 
+	service.Name = c.GetString("name");
+	if service.Name == "" {
+		c.JSON(400, gin.H{
+			"error": true,
+			"message": "Name is missing",
+		})
+		return
+	}
+
 	collection := client.Database("muruga").Collection("serviceProviders");
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

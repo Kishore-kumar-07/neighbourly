@@ -7,6 +7,7 @@ type ServiceProviderModel struct {
 	Experience string `json:"experience" bson:"experience"`
 	ServiceDescription string `json:"serviceDescription" bson:"serviceDescription"`
 	Rating float64 `json:"rating" bson:"rating"`
+	Name string `json:"name" bson:"name"`
 }
 
 func (s * ServiceProviderModel) SetDefaults() {
@@ -16,4 +17,5 @@ func (s * ServiceProviderModel) SetDefaults() {
 	s.Experience = ""
 	s.ServiceDescription = ""
 	s.Rating = 0
+	s.Name = ""
 }
