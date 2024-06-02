@@ -48,7 +48,6 @@ func ViewServices (c * gin.Context){
 			"message": "No services found",
 		})
 		return
-	
 	}
 
 	c.JSON(200, gin.H{

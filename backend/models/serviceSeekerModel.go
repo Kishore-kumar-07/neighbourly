@@ -1,5 +1,12 @@
 package models
 
+const (
+	 Pending = "pending"
+	 Accepted = "accepted"
+	 Rejected = "rejected"
+	 Completed = "completed"
+)
+
 type Service struct {
 	SeekerEmail string `json:"seekerEmail"`
 	ProviderEmail string `json:"providerEmail"`
@@ -15,5 +22,5 @@ func (b *Service) SetDefaults() {
 	b.Date = ""
 	b.Time = ""
 	b.Description = ""
-	b.Status = "pending"
+	b.Status = Pending
 }
