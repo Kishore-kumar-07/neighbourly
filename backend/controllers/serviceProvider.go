@@ -30,8 +30,9 @@ func ViewServices (c * gin.Context){
 	defer cancel()
 
 	email := c.GetString("email");
+	status := c.Param("status");
 
-	doc, err := collection.Find(ctx, bson.M{"provideremail": email});
+	doc, err := collection.Find(ctx, bson.M{"provideremail": email, "status": status});
 	if err != nil {
 		c.JSON(500, gin.H{
 			"error": true,

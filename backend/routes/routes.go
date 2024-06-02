@@ -32,7 +32,7 @@ func SetupRouter() *gin.Engine {
 	r.POST("/searchService", controllers.SearchService)
 	r.POST("/buyService", controllers.BuyService)
 
-	r.GET("/viewServices", controllers.ViewServices)
+	r.GET("/viewServices/:status", controllers.ViewServices)
 	r.POST("/updateService/:id/:status", controllers.UpdateServiceStatus)
 
 	return r
