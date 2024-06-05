@@ -26,7 +26,7 @@ func ViewServices (c * gin.Context){
 
 	client := config.Client;
 	collection := client.Database("muruga").Collection("buyService")
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
 
 	email := c.GetString("email");
@@ -73,7 +73,7 @@ func UpdateServiceStatus (c * gin.Context){
 	client := config.Client;
 
 	collection := client.Database("muruga").Collection("buyService")
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
 
 	id, err := primitive.ObjectIDFromHex(c.Param("id"))

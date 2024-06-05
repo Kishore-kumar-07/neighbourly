@@ -53,7 +53,7 @@ func SetProvider (c *gin.Context) {
 	}
 
 	collection := client.Database("muruga").Collection("serviceProviders");
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
 	
 	_, err := collection.InsertOne(ctx, service);
@@ -79,7 +79,7 @@ func TopRatedProviders(c *gin.Context) {
     client := config.Client
 
     collection := client.Database("muruga").Collection("serviceProviders")
-    ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+    ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
     defer cancel()
 
     findOptions := options.Find().SetSort(map[string]int{"rating": -1}).SetLimit(5)
@@ -111,7 +111,7 @@ func SearchService(c *gin.Context){
 	var serviceProviders []models.ServiceProviderModel;
 	client := config.Client;
 	collection := client.Database("muruga").Collection("serviceProviders")
-    ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+    ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
     defer cancel()
 
 	var title searchTitle;

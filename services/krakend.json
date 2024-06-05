@@ -1,0 +1,153 @@
+{
+  "version": 3,
+  "name": "Neighbourly micro services",
+  "port": 5000,
+  "debug": true,
+  "log_level": "DEBUG",
+  "endpoints": [
+    {
+      "endpoint": "/",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/",
+          "host": ["https://neighbourly-user-service.onrender.com"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/signup",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/signup",
+          "host": ["https://neighbourly-user-service.onrender.com"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/login",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/login",
+          "host": ["https://neighbourly-user-service.onrender.com"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/setProvider",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/setProvider",
+          "host": ["https://neighbourly-service-service.onrender.com"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/topRatedProviders",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/topRatedProviders",
+          "host": ["https://neighbourly-service-service.onrender.com"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/searchService",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/searchService",
+          "host": ["https://neighbourly-service-service.onrender.com"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/buyService",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/buyService",
+          "host": ["https://neighbourly-service-seeker-service.onrender.com"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/viewServices/{status}",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/viewServices/{status}",
+          "host": ["https://neighbourly-service-provider-service.onrender.com"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/updateService/{id}/{status}",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/updateService/{id}/{status}",
+          "host": ["https://neighbourly-service-provider-service.onrender.com"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
