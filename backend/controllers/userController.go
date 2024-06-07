@@ -122,6 +122,7 @@ func Login (c *gin.Context) {
 		"email": user.Email,
 		"role" : user.Role,
 		"name" : user.Name,
+		"phone" : user.Phone,
 		"exp": time.Now().Add(time.Hour * 24 * 7).Unix(),
 	})
 

@@ -45,6 +45,8 @@ func BuyService(c* gin.Context){
 	defer cancel()
 
 	buyServiceStruct.SeekerEmail = c.GetString("email");
+	buyServiceStruct.SeekerName = c.GetString("name");
+	buyServiceStruct.SeekerPhone = c.GetString("phone");
 
 	_, err := collection.InsertOne(ctx, buyServiceStruct);
 	if err != nil {
