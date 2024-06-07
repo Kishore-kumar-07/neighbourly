@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 	"os"
-	
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )
@@ -49,6 +49,7 @@ func AuthMiddleware() gin.HandlerFunc{
 			c.Set("email", claims["email"])
 			c.Set("role", claims["role"])
 			c.Set("name", claims["name"])
+			c.Set("phone", claims["phone"])
 		} else {
 			c.JSON(400, gin.H{
 				"error": true,

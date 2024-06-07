@@ -58,6 +58,7 @@ func SignUp (c *gin.Context) {
 		"email": user.Email,
 		"role" : user.Role,
 		"name" : user.Name,
+		"phone" : user.Phone,
 		"exp": time.Now().Add(time.Hour * 24 * 7).Unix(),
 	})
 
@@ -98,7 +99,7 @@ func Login (c *gin.Context) {
 	}
 
 	collection := client.Database("muruga").Collection("users");
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	doc := collection.FindOne(ctx, bson.M{"email": loginReq.Email});
@@ -122,6 +123,7 @@ func Login (c *gin.Context) {
 		"email": user.Email,
 		"role" : user.Role,
 		"name" : user.Name,
+		"phone" : user.Phone,
 		"exp": time.Now().Add(time.Hour * 24 * 7).Unix(),
 	})
 

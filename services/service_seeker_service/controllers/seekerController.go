@@ -27,7 +27,7 @@ func BuyService(c* gin.Context){
 	}
 	
 	collection := client.Database("muruga").Collection("serviceProviders");
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	doc := collection.FindOne(ctx, bson.M{"email": buyServiceStruct.ProviderEmail});
@@ -41,10 +41,12 @@ func BuyService(c* gin.Context){
 	}
 
 	collection = client.Database("muruga").Collection("buyService");
-	ctx, cancel = context.WithTimeout(context.Background(), 20*time.Second)
+	ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	buyServiceStruct.SeekerEmail = c.GetString("email");
+	buyServiceStruct.SeekerName = c.GetString("name");
+	buyServiceStruct.SeekerPhone = c.GetString("phone");
 
 	_, err := collection.InsertOne(ctx, buyServiceStruct);
 	if err != nil {

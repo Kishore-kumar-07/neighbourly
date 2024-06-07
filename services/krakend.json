@@ -15,7 +15,8 @@
           "host": ["https://neighbourly-user-service.onrender.com"],
           "extra_config": {
             "backend/http": {
-              "return_error_details": "backend_alias"
+              "return_error_details": "backend_alias",
+              "headers_to_pass": ["Authorization", "Content-Type"]
             }
           }
         }
@@ -31,7 +32,8 @@
           "host": ["https://neighbourly-user-service.onrender.com"],
           "extra_config": {
             "backend/http": {
-              "return_error_details": "backend_alias"
+              "return_error_details": "backend_alias",
+              "headers_to_pass": ["Authorization", "Content-Type"]
             }
           }
         }
@@ -47,7 +49,8 @@
           "host": ["https://neighbourly-user-service.onrender.com"],
           "extra_config": {
             "backend/http": {
-              "return_error_details": "backend_alias"
+              "return_error_details": "backend_alias",
+              "headers_to_pass": ["Authorization", "Content-Type"]
             }
           }
         }
@@ -63,7 +66,8 @@
           "host": ["https://neighbourly-service-service.onrender.com"],
           "extra_config": {
             "backend/http": {
-              "return_error_details": "backend_alias"
+              "return_error_details": "backend_alias",
+              "headers_to_pass": ["Authorization", "Content-Type"]
             }
           }
         }
@@ -79,7 +83,8 @@
           "host": ["https://neighbourly-service-service.onrender.com"],
           "extra_config": {
             "backend/http": {
-              "return_error_details": "backend_alias"
+              "return_error_details": "backend_alias",
+              "headers_to_pass": ["Authorization", "Content-Type"]
             }
           }
         }
@@ -95,7 +100,8 @@
           "host": ["https://neighbourly-service-service.onrender.com"],
           "extra_config": {
             "backend/http": {
-              "return_error_details": "backend_alias"
+              "return_error_details": "backend_alias",
+              "headers_to_pass": ["Authorization", "Content-Type"]
             }
           }
         }
@@ -111,7 +117,8 @@
           "host": ["https://neighbourly-service-seeker-service.onrender.com"],
           "extra_config": {
             "backend/http": {
-              "return_error_details": "backend_alias"
+              "return_error_details": "backend_alias",
+              "headers_to_pass": ["Authorization", "Content-Type"]
             }
           }
         }
@@ -127,7 +134,8 @@
           "host": ["https://neighbourly-service-provider-service.onrender.com"],
           "extra_config": {
             "backend/http": {
-              "return_error_details": "backend_alias"
+              "return_error_details": "backend_alias",
+              "headers_to_pass": ["Authorization", "Content-Type"]
             }
           }
         }
@@ -143,7 +151,8 @@
           "host": ["https://neighbourly-service-provider-service.onrender.com"],
           "extra_config": {
             "backend/http": {
-              "return_error_details": "backend_alias"
+              "return_error_details": "backend_alias",
+              "headers_to_pass": ["Authorization", "Content-Type"]
             }
           }
         }
