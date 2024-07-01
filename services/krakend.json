@@ -12,7 +12,7 @@
       "backend": [
         {
           "url_pattern": "/",
-          "host": ["https://neighbourly-user-service.onrender.com"],
+          "host": ["65.2.168.125"],
           "extra_config": {
             "backend/http": {
               "return_error_details": "backend_alias",
@@ -29,7 +29,7 @@
       "backend": [
         {
           "url_pattern": "/signup",
-          "host": ["https://neighbourly-user-service.onrender.com"],
+          "host": ["65.2.168.125"],
           "extra_config": {
             "backend/http": {
               "return_error_details": "backend_alias",
@@ -46,7 +46,7 @@
       "backend": [
         {
           "url_pattern": "/login",
-          "host": ["https://neighbourly-user-service.onrender.com"],
+          "host": ["65.2.168.125"],
           "extra_config": {
             "backend/http": {
               "return_error_details": "backend_alias",
@@ -60,10 +60,13 @@
       "endpoint": "/setProvider",
       "method": "POST",
       "output_encoding": "json",
+      "input_headers": [
+        "Authorization"
+      ],
       "backend": [
         {
           "url_pattern": "/setProvider",
-          "host": ["https://neighbourly-service-service.onrender.com"],
+          "host": ["13.126.20.82"],
           "extra_config": {
             "backend/http": {
               "return_error_details": "backend_alias",
@@ -77,10 +80,13 @@
       "endpoint": "/topRatedProviders",
       "method": "GET",
       "output_encoding": "json",
+      "input_headers": [
+        "Authorization"
+      ],
       "backend": [
         {
           "url_pattern": "/topRatedProviders",
-          "host": ["https://neighbourly-service-service.onrender.com"],
+          "host": ["13.126.20.82"],
           "extra_config": {
             "backend/http": {
               "return_error_details": "backend_alias",
@@ -94,10 +100,13 @@
       "endpoint": "/searchService",
       "method": "POST",
       "output_encoding": "json",
+      "input_headers": [
+        "Authorization"
+      ],
       "backend": [
         {
           "url_pattern": "/searchService",
-          "host": ["https://neighbourly-service-service.onrender.com"],
+          "host": ["13.126.20.82"],
           "extra_config": {
             "backend/http": {
               "return_error_details": "backend_alias",
@@ -111,10 +120,13 @@
       "endpoint": "/buyService",
       "method": "POST",
       "output_encoding": "json",
+      "input_headers": [
+        "Authorization"
+      ],
       "backend": [
         {
           "url_pattern": "/buyService",
-          "host": ["https://neighbourly-service-seeker-service.onrender.com"],
+          "host": ["3.111.171.134"],
           "extra_config": {
             "backend/http": {
               "return_error_details": "backend_alias",
@@ -128,10 +140,13 @@
       "endpoint": "/viewServices/{status}",
       "method": "GET",
       "output_encoding": "json",
+      "input_headers": [
+        "Authorization"
+      ],
       "backend": [
         {
           "url_pattern": "/viewServices/{status}",
-          "host": ["https://neighbourly-service-provider-service.onrender.com"],
+          "host": ["13.234.239.196"],
           "extra_config": {
             "backend/http": {
               "return_error_details": "backend_alias",
@@ -145,10 +160,13 @@
       "endpoint": "/updateService/{id}/{status}",
       "method": "POST",
       "output_encoding": "json",
+      "input_headers": [
+        "Authorization"
+      ],
       "backend": [
         {
           "url_pattern": "/updateService/{id}/{status}",
-          "host": ["https://neighbourly-service-provider-service.onrender.com"],
+          "host": ["13.234.239.196"],
           "extra_config": {
             "backend/http": {
               "return_error_details": "backend_alias",

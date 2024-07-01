@@ -23,8 +23,11 @@ func AuthMiddleware() gin.HandlerFunc{
 				"error": true,
 				"message": "Authorization header is missing",
 			})
+			c.Abort();
 			return
 		}
+
+		fmt.Println("checking authHeader", authHeader);
 
 	
 		tokenString := strings.TrimPrefix(authHeader, "Bearer ")
@@ -42,6 +45,7 @@ func AuthMiddleware() gin.HandlerFunc{
 				"error": true,
 				"message": "Error decoding token: " + err.Error(),
 			})
+			c.Abort();
 			return
 		}
 	
@@ -55,6 +59,7 @@ func AuthMiddleware() gin.HandlerFunc{
 				"error": true,
 				"message": "Invalid token",
 			})
+			c.Abort();
 			return
 		}
 	
