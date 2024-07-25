@@ -26,7 +26,6 @@ func ConnectDB() error {
 		log.Fatal(err)
 		return err
 	}
-
 	ctx, cancel = context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	err = Client.Ping(ctx, readpref.Primary())
