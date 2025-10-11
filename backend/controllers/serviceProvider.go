@@ -19,8 +19,6 @@ type Service struct {
 	Time string `json:"time"`
 	Description string `json:"description"`
 	Status string `json:"status"`
-	Seekername string `json:"seekername"`
-	Seekerphone string `json:"Seekerphone"`
 }
 
 func ViewServices (c * gin.Context){
