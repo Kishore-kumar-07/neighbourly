@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Kishore-kumar-07/neighbourly/services/service_provider_service/config"
+	"github.com/Kishore-kumar-07/neighbourly/backend/config"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -19,8 +19,6 @@ type Service struct {
 	Time string `json:"time"`
 	Description string `json:"description"`
 	Status string `json:"status"`
-	Seekername string `json:"seekername"`
-	Seekerphone string `json:"Seekerphone"`
 }
 
 func ViewServices (c * gin.Context){
@@ -28,7 +26,7 @@ func ViewServices (c * gin.Context){
 
 	client := config.Client;
 	collection := client.Database("muruga").Collection("buyService")
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	email := c.GetString("email");
@@ -75,7 +73,7 @@ func UpdateServiceStatus (c * gin.Context){
 	client := config.Client;
 
 	collection := client.Database("muruga").Collection("buyService")
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	id, err := primitive.ObjectIDFromHex(c.Param("id"))
